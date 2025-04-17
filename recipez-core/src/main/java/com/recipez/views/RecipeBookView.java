@@ -69,9 +69,11 @@ public class RecipeBookView extends StackPane implements Observer {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("recipeName")); 
 
         tableView.getColumns().add(nameColumn);
+
         
-        addViewButtonToTable();
         tableView.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+
+        addViewButtonToTable();
         
         vboxRecipeBookContainer = new VBox(hboxRecipeBook, tableView);
         this.getChildren().add(vboxRecipeBookContainer);
