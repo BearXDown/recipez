@@ -75,6 +75,33 @@ public class RecipeBookView extends StackPane implements Observer {
         this.getChildren().add(vboxRecipeBookContainer);
     }
 
+    private void addViewButtonToTable() {
+    TableColumn<Recipe, Void> colBtn = new TableColumn<>("Action");
+
+    colBtn.setCellFactory(param -> new TableCell<>() {
+        private final Button btn = new Button("View");
+
+        {
+            btn.setOnAction(event -> {
+                Recipe selectedRecipe = getTableView().getItems().get(getIndex());
+                openRecipeInView(selectedRecipe);
+            });
+        }
+
+        @Override
+        protected void updateItem(Void item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty) {
+                setGraphic(null);
+            } else {
+                setGraphic(btn);
+            }
+        }
+    });
+
+    tableView.getColumns().add(colBtn);
+
+
     private void loadRecipes() {
         recipeList = recipeBookViewModel.getRecipeBook();
         tableView.getItems().setAll(recipeList); // Ensure this method exists in RecipeBookViewModel
